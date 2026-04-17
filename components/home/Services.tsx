@@ -91,20 +91,27 @@ const AI_TERMINAL_LINES = [
 
 function AITerminal() {
   const [lines, setLines] = useState<string[]>([]);
+  const [cycle, setCycle] = useState(0);
 
-  if (typeof window !== "undefined") {
-    if (lines.length === 0) {
-      let i = 0;
-      const t = setInterval(() => {
-        setLines((prev) => [...prev, AI_TERMINAL_LINES[i]]);
+  useEffect(() => {
+    let i = 0;
+    let resetTimer: ReturnType<typeof setTimeout>;
+    setLines([]);
+    const t = setInterval(() => {
+      if (i < AI_TERMINAL_LINES.length) {
+        const line = AI_TERMINAL_LINES[i];
+        setLines((prev) => [...prev, line]);
         i++;
-        if (i >= AI_TERMINAL_LINES.length) {
-          clearInterval(t);
-          setTimeout(() => setLines([]), 3000);
-        }
-      }, 600);
-    }
-  }
+      } else {
+        clearInterval(t);
+        resetTimer = setTimeout(() => setCycle((c) => c + 1), 3000);
+      }
+    }, 600);
+    return () => {
+      clearInterval(t);
+      clearTimeout(resetTimer);
+    };
+  }, [cycle]);
 
   return (
     <div className="mt-4 rounded-lg bg-[var(--bg-void)] p-4 border border-[var(--border-faint)]">
@@ -121,7 +128,7 @@ function AITerminal() {
         {lines.map((line, i) => (
           <div
             key={i}
-            className={line.startsWith(">") ? "text-[var(--phosphor)]" : "text-[var(--text-muted)]"}
+            className={line?.startsWith(">") ? "text-[var(--phosphor)]" : "text-[var(--text-muted)]"}
           >
             {line}
           </div>
