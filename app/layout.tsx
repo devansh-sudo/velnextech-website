@@ -86,6 +86,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {/* Runs synchronously before browser scroll restoration fires */}
+        <script dangerouslySetInnerHTML={{ __html: `history.scrollRestoration="manual";` }} />
+      </head>
       <body
         className={`${syne.variable} ${epilogue.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased`}
       >
