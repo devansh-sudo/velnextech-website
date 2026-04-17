@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "var(--bg-base)",
+        foreground: "var(--text-primary)",
+      },
+      fontFamily: {
+        display: ["var(--font-syne)", "sans-serif"],
+        heading: ["var(--font-epilogue)", "sans-serif"],
+        body: ["var(--font-plus-jakarta)", "sans-serif"],
+        mono: ["var(--font-jetbrains)", "monospace"],
+        accent: ["var(--font-instrument)", "serif"],
       },
     },
   },
