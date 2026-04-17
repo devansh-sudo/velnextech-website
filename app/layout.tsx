@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, Epilogue, Plus_Jakarta_Sans, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import ScrollReset from "@/components/ScrollReset";
 import "./globals.css";
 
 const syne = Syne({
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${syne.variable} ${epilogue.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased`}
       >
+        <ScrollReset />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--electric)] focus:text-white focus:rounded"
